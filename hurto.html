@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://kit.fontawesome.com/5f0060c70f.js" crossorigin="anonymous"></script>
+  <title>Mariana | Inicio</title>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+ 
+</head>
+<body onload="listarDatos()" class="hold-transition sidebar-mini layout-fixed" >
+<div class="wrapper">
+
+    <div class="col-lg-12 card-header">
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+          Agregar hurto
+        </button>
+      </div>
+
+
+<table id="tablaHurtos"  class="table-responsive table-bordered table-striped ">
+                  <thead>
+                    <tr>
+                      <th>Dirección</th>
+                      <th>Latitud</th>
+                      <th>Longitud</th>
+                      <th>Descripción</th>
+                      <th>Fecha</th>                      
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="contenido">
+                    
+                  </tbody>
+                  <tfoot>
+                    
+                  </tfoot>
+</table>
+             
+          
+  <!-- Modal Crear-->
+  <div class="modal " id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel1">Crear hurto</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="card-body">
+                <form action="">
+                    <div class="row ">
+                      <div class="col-md-6">
+                        <label for="">Dirección</label><br>
+                        <input type="text" class="form-control col-sm-12" id="direccion" placeholder="Ejm: Cl 00 CR 00 00" >
+                        <div id="errorDireccion"></div><br>
+                      </div>  
+                      <div class="col-md-6">
+                        <label for="">Latitud</label><br>
+                        <input type="float" class="form-control col-sm-12" id="latitud" placeholder="0">
+                        <div id="errorLatitud"></div><br>
+                      </div>
+                    </div>
+    
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label for="">Longitud</label><br>
+                        <input type="float" class="form-control col-sm-12" id="longitud" placeholder="0" >
+                        <div id="errorLongitud"></div><br>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="">Descripción</label><br>
+                        <input type="text" class="form-control col-sm-12" id="descripcion" placeholder="Ingrese aca los comentarios adicionales">
+                        <div id="errorDescripcion"></div><br>
+                      </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  <button id="btnRegistrar" type="button" class="btn btn-primary">Guardar</button>
+                </div>
+              </div> 
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+       <!-- Modal Editar-->
+    <div class="modal " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Cliente</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body"> 
+              <div class="card-body">
+                <form action="">
+                    <div class="row ">
+                      <div class="col-md-6">
+                        <label for="">Dirección</label><br>
+                        <input type="text" class="form-control col-sm-12" id="direccion1" placeholder="Ejm: Cl 00 CR 00 00" >
+                        <div id="errorDireccion1"></div><br>
+                      </div>  
+                      <div class="col-md-6">
+                        <label for="">Latitud</label><br>
+                        <input type="number" class="form-control col-sm-12" id="latitud1" placeholder="0">
+                        <div id="errorLatitud1"></div><br>
+                      </div>
+                    </div>
+    
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label for="">Longitud</label><br>
+                        <input type="number" class="form-control col-sm-12" id="longitud1" placeholder="0" >
+                        <div id="errorLongitud1"></div><br>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="">Descripción</label><br>
+                        <input type="text" class="form-control col-sm-12" id="descripcion1" placeholder="Ingrese aca los comentarios adicionales">
+                        <div id="errorDescripcion1"></div><br>
+                      </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  <button id="btnActualizar" type="button" class="btn btn-primary">Guardar</button>
+                </div>
+      
+              </div> 
+            </div>
+            
+          </div>
+        </div>
+    </div>
+
+  
+  
+ 
+</div>
+<!-- ./wrapper -->
+
+
+<script src="https://cdn.jsdelivr.net/npm/moment/moment.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="../js/hurto.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html> 
